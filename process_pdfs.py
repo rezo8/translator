@@ -11,10 +11,10 @@ def process_all_pdfs():
             indexer = PDFPageIndexer(pdf_path)
             pages = indexer.index_pdf()
 
-            for page in pages:
-                print(f"Page: {page['page_number']}")
-                print(f"Text sample: {page['text'][:200]}")
-                print('-' * 40)
+            # for page in pages:
+            #     print(f"Page: {page['page_number']}")
+            #     print(f"Text sample: {page['text'][:200]}")
+            #     print('-' * 40)
 
 if __name__ == "__main__":
     process_all_pdfs()
