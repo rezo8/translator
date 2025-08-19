@@ -12,8 +12,8 @@ class PDFPageIndexer:
     def index_pdf(self) -> List[Dict[str, Any]]:
         
         with pdfplumber.open(self.pdf_path) as pdf:
-            for i, page in enumerate(pdf.pages):
-                self.process_page(page, i)
+          for i, page in enumerate(pdf.pages):
+            self.process_page(page, i)
         return self.pages
 
     def get_document_text(self) -> str:
@@ -21,20 +21,14 @@ class PDFPageIndexer:
 
     def process_page(self, page, page_number):
         text = page.extract_text() or ''
-        try:
-            lang = detect(text) if text.strip() else None
-            print(lang)
-            if(lang.lower() != 'en'):
-                translated = translate_text(text, 'EN')
-            else:
-                translated = None
-        except LangDetectException:
-            lang = None
+        translationResult = translate_text(text, 'EN')
+        if(translationResult.language.lower() != 'en'):
+          print(translationResult)
         self.pages.append({
-            'page_number': page_number + 1,
-            'text': text,
-            'translated_text': translated,
-            'language': lang
+          'page_number': page_number + 1,
+          'text': text,
+          'translated_text': translationResult.translated_text,
+          'language': translationResult.language
         })
 
   
