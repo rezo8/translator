@@ -22,8 +22,6 @@ class PDFPageIndexer:
     def process_page(self, page, page_number):
         text = page.extract_text() or ''
         translationResult = translate_text(text, 'EN')
-        if(translationResult.language.lower() != 'en'):
-          print(translationResult)
         self.pages.append({
           'page_number': page_number + 1,
           'text': text,

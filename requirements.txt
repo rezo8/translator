@@ -1,0 +1,4 @@
+pdfplumber
+langdetect
+requests
+python-dotenv

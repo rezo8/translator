@@ -19,7 +19,6 @@ def translate_text(text: str, target_lang: str = 'EN') -> PageTranslation:
     Translate text using DeepL API.
     Loads API key from .env file (DEEPL_API_KEY).
     """
-
     try:
         lang = detect(text) if text.strip() else None
     except LangDetectException:
