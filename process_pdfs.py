@@ -1,5 +1,5 @@
 import os
-from pdf_parser import PDFPageIndexer
+from pdf_parser import PDFProcessor
 
 PDFS_DIR = os.path.join(os.path.dirname(__file__), 'pdfs')
 
@@ -8,10 +8,9 @@ def process_all_pdfs():
         if filename.lower().endswith('.pdf'):
             pdf_path = os.path.join(PDFS_DIR, filename)
             print(f'Processing: {filename}')
-            indexer = PDFPageIndexer(pdf_path)
-            pages = indexer.index_pdf()
+            processedPdf = PDFProcessor(pdf_path)
 
-            for page in pages:
+            for page in processedPdf.pages:
                 print(f"Page: {page['page_number']}")
                 print(f"Text sample: {page['text'][:200]}")
                 print('-' * 40)

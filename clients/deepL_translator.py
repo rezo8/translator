@@ -35,10 +35,8 @@ def translate_text(text: str, target_lang: str = 'EN') -> PageTranslation:
         translated_text=translated
     )
 
-
-
-
-def run_translation(text: str, lang: str) -> str:
+def run_translation(text: str, target_lang: str) -> str:
+    return text
     if not api_key:
             raise ValueError('DEEPL_API_KEY not found in .env file')
     if not text.strip():
@@ -47,9 +45,8 @@ def run_translation(text: str, lang: str) -> str:
     headers = {'Authorization': f'DeepL-Auth-Key {api_key}'}
     data = {
         'text': text,
-        'target_lang': 'EN'
+        'target_lang': target_lang
     }
-    # return text
     try:
         response = requests.post(url, data=data, headers=headers)
         response.raise_for_status()
