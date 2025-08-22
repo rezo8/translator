@@ -1,18 +1,23 @@
-from langdetect import detect, LangDetectException
-import requests
 import os
-from dotenv import load_dotenv
 from dataclasses import dataclass
+
+import requests
+from dotenv import load_dotenv
+from langdetect import LangDetectException, detect
+
+
 @dataclass
 class PageTranslation:
     original_text: str
     language: str
     translated_text: str
 
+
 load_dotenv()
 
 
 api_key = os.getenv('DEEPL_API_KEY')
+
 
 def translate_text(text: str, target_lang: str = 'EN') -> PageTranslation:
     """
@@ -24,7 +29,7 @@ def translate_text(text: str, target_lang: str = 'EN') -> PageTranslation:
     except LangDetectException:
         lang = None
 
-    if(lang and lang.lower() != target_lang.lower()):
+    if (lang and lang.lower() != target_lang.lower()):
         translated = run_translation(text, 'EN')
     else:
         translated = None
@@ -35,9 +40,10 @@ def translate_text(text: str, target_lang: str = 'EN') -> PageTranslation:
         translated_text=translated
     )
 
+
 def run_translation(text: str, target_lang: str) -> str:
     if not api_key:
-            raise ValueError('DEEPL_API_KEY not found in .env file')
+        raise ValueError('DEEPL_API_KEY not found in .env file')
     if not text.strip():
         return None
     url = 'https://api-free.deepl.com/v2/translate'
