@@ -36,7 +36,6 @@ def translate_text(text: str, target_lang: str = 'EN') -> PageTranslation:
     )
 
 def run_translation(text: str, target_lang: str) -> str:
-    return text
     if not api_key:
             raise ValueError('DEEPL_API_KEY not found in .env file')
     if not text.strip():
